@@ -2,7 +2,7 @@
     <nav :class="style.navbar" role="navigation" aria-label="main navigation">
   <div :class="style.navbarBrand">
     <a :class="style.navbarItem">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      <span><ion-icon name="alarm-outline" size="large"></ion-icon>TacToc</span>
     </a>
 
     <a role="button" :class="style.navbarBurger" aria-label="menu" aria-expanded="false">
@@ -25,3 +25,7 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+ @import '../scss/style.scss';
+</style>
