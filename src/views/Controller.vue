@@ -29,7 +29,7 @@
     Password:
     <input type="text" ref="password" :class="style.inputDefault">
   </label>
-  <button :class="style.btnInfo" @click="login()">Login</button>
+  <button :class="style.btnInfo" @click="login(this.$refs.username.value ,this.$refs.password.value)">Login</button>
 </div>
 </template>
 
@@ -46,19 +46,16 @@ export default {
       }
     },
     methods:{
-      async login(){
-        const response = await fetch('localhost:8000/core/login/', {
+      async login(name, pass){
+        const response = await fetch(url+'/login/', {
           method: 'POST',
-          headers:{
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({
-            "username": this.$refs.username.value,
-            "password": this.$refs.password.value
+          body: JSON.stringify({
+            username: name,
+            password: pass
           })
         })
         const data = await response.json()
-        console.log(data)
+        
       }
     }
 }
