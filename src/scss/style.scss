@@ -8,4 +8,30 @@
     display: flex;
     align-items: center;
     font-weight: 700;
+    cursor: pointer;
 }
+
+.field{
+    gap: 10px;
+}
+
+hr{
+    margin: 5px;
+    width: 100%;
+    background-color: grey;
+}
+
+.formLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+    width: 300px;
+    position: absolute;
+    top: 40%;
+    right: 20%;
+    left: 20%;
+    margin: 0 auto;
+  }
