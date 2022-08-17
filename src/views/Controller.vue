@@ -18,22 +18,24 @@
 </nav>
 
 <div :class="style.loginForm" v-if="form.login">
+  <button :class="style.btnCloseLight" @click="form.login = !form.login"><ion-icon name="close-circle-outline" size="large"></ion-icon></button>
   <h1>Login</h1>
   <hr>
   <label>
     Username:
-    <input type="text" :class="style.inputDefault">
+    <input type="text" ref="username" :class="style.inputDefault">
   </label>
   <label>
     Password:
-    <input type="text" :class="style.inputDefault">
+    <input type="text" ref="password" :class="style.inputDefault">
   </label>
-  <button :class="style.btnInfo">Login</button>
+  <button :class="style.btnInfo" @click="login()">Login</button>
 </div>
 </template>
 
 <script>
 import {style} from '../methods/style.js'
+import {url} from '../methods/url.js'
 export default {
     name: "Controller",
     data(){
@@ -41,6 +43,22 @@ export default {
         style: style,
         isSingIn: false,
         form: {login: false, register: false}
+      }
+    },
+    methods:{
+      async login(){
+        const response = await fetch('localhost:8000/core/login/', {
+          method: 'POST',
+          headers:{
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify({
+            "username": this.$refs.username.value,
+            "password": this.$refs.password.value
+          })
+        })
+        const data = await response.json()
+        console.log(data)
       }
     }
 }

@@ -9,6 +9,7 @@ export const style = {
     btnInfo: 'button is-info',
     btnWarningLight: 'button is-warning is-light',
     btnPrimaryLight: 'button is-primary is-light',
+    btnCloseLight: 'button is-danger is-light is-left',
     loginForm: 'formLogin card',
     inputDefault: 'input is-hovered',
 }
