@@ -12,6 +12,7 @@
         <div :class="style.fieldIsGrouped">
           <button v-if="!isSingIn" :class="style.btnWarningLight" @click="form.register = !form.register">Register</button>
           <button v-if="!isSingIn" :class="style.btnPrimaryLight" @click="form.login = !form.login">Login</button>
+          <div v-if="isSingIn" :class="usertag"><ion-icon name="person-circle-outline" size="large"></ion-icon><h1>{{username}}</h1></div>
         </div>
       </div>
     </div>
@@ -33,22 +34,22 @@
 </div>
 
 <div :class="style.loginForm" v-if="form.register">
-  <button :class="style.btnCloseLight" @click="form.login = !form.login"><ion-icon name="close-circle-outline" size="large"></ion-icon></button>
+  <button :class="style.btnCloseLight" @click="form.register = !form.register"><ion-icon name="close-circle-outline" size="large"></ion-icon></button>
   <h1>Register</h1>
   <hr>
   <label>
     Username:
-    <input type="text" ref="username" :class="style.inputDefault">
+    <input type="text" ref="usernameCad" :class="style.inputDefault" disabled>
   </label>
   <label>
     Password:
-    <input type="text" ref="password" :class="style.inputDefault">
+    <input type="text" ref="passwordCad" :class="style.inputDefault" disabled>
   </label>
   <label>
     Email:
-    <input type="text" ref="email" :class="style.inputDefault">
+    <input type="text" ref="emailCad" :class="style.inputDefault" disabled>
   </label>
-  <button :class="style.btnInfo" @click="register(this.$refs.username.value ,this.$refs.password.value, this.$refs.email.value)">Registrar</button>
+  <button :class="style.btnInfo" disabled>Registrar</button>
 </div>
 </template>
 
@@ -60,8 +61,10 @@ export default {
     data(){
       return {
         style: style,
+        usertag: 'usertag',
         isSingIn: false,
-        form: {login: false, register: false}
+        form: {login: false, register: false},
+        username: localStorage.getItem('username')
       }
     },
     methods:{
@@ -77,24 +80,13 @@ export default {
           })
         })
         const data = await response.json()
-        console.log(data)
+        localStorage.setItem('accessToken', data.accessToken)
+        localStorage.setItem('refreshToken', data.accessToken)
+        localStorage.setItem('username', this.$refs.username.value)
+        this.form.login = !this.form.login
+        this.isSingIn = !this.isSingIn
       }
     },
-    async register(name, pass, email){
-      const response = await fetch(url + '/user', {
-        method: 'POST',
-        headers:{
-          "Content-type": "application/json"
-        },
-        body: JSON.stringify({
-          username: name,
-          password: pass,
-          email: email
-        })
-      })
-      const data = response.json()
-      console.log(data)
-    }
 }
 </script>
 
@@ -102,5 +94,12 @@ export default {
  @import '../scss/style.scss';
  .card button{
   margin-bottom: 10px;
+ }
+ .usertag{
+  font-size: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
  }
 </style>
