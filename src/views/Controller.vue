@@ -10,7 +10,7 @@
     <div :class="style.navbarEnd">
       <div :class="style.navbarItem">
         <div :class="style.fieldIsGrouped">
-          <button v-if="!isSingIn" :class="style.btnWarningLight">Register</button>
+          <button v-if="!isSingIn" :class="style.btnWarningLight" @click="form.register = !form.register">Register</button>
           <button v-if="!isSingIn" :class="style.btnPrimaryLight" @click="form.login = !form.login">Login</button>
         </div>
       </div>
@@ -31,6 +31,25 @@
   </label>
   <button :class="style.btnInfo" @click="login(this.$refs.username.value ,this.$refs.password.value)">Login</button>
 </div>
+
+<div :class="style.loginForm" v-if="form.register">
+  <button :class="style.btnCloseLight" @click="form.login = !form.login"><ion-icon name="close-circle-outline" size="large"></ion-icon></button>
+  <h1>Register</h1>
+  <hr>
+  <label>
+    Username:
+    <input type="text" ref="username" :class="style.inputDefault">
+  </label>
+  <label>
+    Password:
+    <input type="text" ref="password" :class="style.inputDefault">
+  </label>
+  <label>
+    Email:
+    <input type="text" ref="email" :class="style.inputDefault">
+  </label>
+  <button :class="style.btnInfo" @click="register(this.$refs.username.value ,this.$refs.password.value, this.$refs.email.value)">Registrar</button>
+</div>
 </template>
 
 <script>
@@ -47,16 +66,34 @@ export default {
     },
     methods:{
       async login(name, pass){
-        const response = await fetch(url+'/login/', {
+        const response = await fetch(url+'/oauth/access-token', {
           method: 'POST',
+          headers:{
+            "Content-type": "application/json"
+          },
           body: JSON.stringify({
             username: name,
             password: pass
           })
         })
         const data = await response.json()
-        
+        console.log(data)
       }
+    },
+    async register(name, pass, email){
+      const response = await fetch(url + '/user', {
+        method: 'POST',
+        headers:{
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+          username: name,
+          password: pass,
+          email: email
+        })
+      })
+      const data = response.json()
+      console.log(data)
     }
 }
 </script>
