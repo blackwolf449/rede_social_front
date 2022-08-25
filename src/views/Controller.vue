@@ -87,6 +87,15 @@ export default {
         this.isSingIn = !this.isSingIn
       }
     },
+    async mounted(){
+      const response = await fetch(url+'/oauth', {
+        method: 'GET',
+        headers:{
+          'authorization': 'Bearer ' + localStorage.getItem('accessToken')
+        }
+      })
+      if(response.status == 200) return this.isSingIn = !this.isSingIn
+    }
 }
 </script>
 
