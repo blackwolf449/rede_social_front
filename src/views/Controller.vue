@@ -22,13 +22,14 @@
   <button :class="style.btnCloseLight" @click="form.login = !form.login"><ion-icon name="close-circle-outline" size="large"></ion-icon></button>
   <h1>Login</h1>
   <hr>
+  <p :class="classErro">{{error}}</p>
   <label>
     Username:
     <input type="text" ref="username" :class="style.inputDefault">
   </label>
   <label>
     Password:
-    <input type="text" ref="password" :class="style.inputDefault">
+    <input type="password" ref="password" :class="style.inputDefault">
   </label>
   <button :class="style.btnInfo" @click="login(this.$refs.username.value ,this.$refs.password.value)">Login</button>
 </div>
@@ -51,6 +52,8 @@
   </label>
   <button :class="style.btnInfo" disabled>Registrar</button>
 </div>
+
+<router-view v-if="isSingIn"/>
 </template>
 
 <script>
@@ -62,9 +65,11 @@ export default {
       return {
         style: style,
         usertag: 'usertag',
+        classErro: 'error',
         isSingIn: false,
         form: {login: false, register: false},
-        username: localStorage.getItem('username')
+        username: '',
+        error: '',
       }
     },
     methods:{
@@ -80,9 +85,11 @@ export default {
           })
         })
         const data = await response.json()
+        if(response.status != 200) return this.error = data.message
         localStorage.setItem('accessToken', data.accessToken)
         localStorage.setItem('refreshToken', data.accessToken)
         localStorage.setItem('username', this.$refs.username.value)
+        this.username = localStorage.getItem('username')
         this.form.login = !this.form.login
         this.isSingIn = !this.isSingIn
       }
@@ -94,7 +101,11 @@ export default {
           'authorization': 'Bearer ' + localStorage.getItem('accessToken')
         }
       })
-      if(response.status == 200) return this.isSingIn = !this.isSingIn
+      if(response.status == 200) {
+        this.isSingIn = !this.isSingIn
+        this.username = localStorage.getItem('username')
+        return this.$router.push('/post')
+      }
     }
 }
 </script>
@@ -110,5 +121,8 @@ export default {
   gap: 10px;
   justify-content: center;
   align-items: center;
+ }
+ .error{
+  color: red;
  }
 </style>
