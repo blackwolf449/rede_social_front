@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import {searchPosts} from '../methods/posts.js'
 import {style} from '../methods/style.js'
 export default{
     name: 'Posts',
@@ -10,6 +11,9 @@ export default{
         return{
             style: style
         }
+    },
+    async mounted(){
+        // this.posts = await searchPosts()
     }
 }
 </script>
