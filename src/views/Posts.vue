@@ -1,5 +1,7 @@
 <template>
-    
+    <div :class="style.card" v-for="post in posts" :key="post">
+        <h1>{{posts}}</h1>
+    </div>
 </template>
 
 <script>
@@ -9,11 +11,12 @@ export default{
     name: 'Posts',
     data(){
         return{
-            style: style
+            style: style,
+            posts: [],
         }
     },
     async mounted(){
-        // this.posts = await searchPosts()
+        this.posts = await searchPosts()
     }
 }
 </script>

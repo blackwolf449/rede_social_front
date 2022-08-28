@@ -12,4 +12,5 @@ export const style = {
     btnCloseLight: 'button is-danger is-light is-left',
     loginForm: 'formLogin card',
     inputDefault: 'input is-hovered',
+    card: 'card',
 }

@@ -91,6 +91,7 @@ export default {
         localStorage.setItem('username', this.$refs.username.value)
         this.username = localStorage.getItem('username')
         this.form.login = !this.form.login
+        this.$router.push('/posts')
         this.isSingIn = !this.isSingIn
       }
     },
@@ -104,7 +105,7 @@ export default {
       if(response.status == 200) {
         this.isSingIn = !this.isSingIn
         this.username = localStorage.getItem('username')
-        return this.$router.push('/post')
+        return this.$router.push('/posts')
       }
     }
 }
