@@ -13,4 +13,6 @@ export const style = {
     loginForm: 'formLogin card',
     inputDefault: 'input is-hovered',
     card: 'card',
+    title: 'title',
+    title4: 'title is-4',
 }

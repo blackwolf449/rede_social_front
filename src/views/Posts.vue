@@ -1,7 +1,15 @@
 <template>
+    <button :class="style.btnInfoLight">Criar post</button>
     <div :class="style.card" v-for="post in posts" :key="post">
-        <h1>{{posts}}</h1>
+        <div>
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <p>{{post.username}}</p>
+        </div>
+        <h1 :class="style.title4">{{post.title}}</h1>
+        <hr>
+        <p>{{post.description}}</p>
     </div>
+    
 </template>
 
 <script>
@@ -23,4 +31,28 @@ export default{
 
 <style lang="scss" scoped>
     @import '../scss/style.scss';
+    .card{
+        hr{
+            width: 100px;
+            margin: 0 auto;
+        }
+        div{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .title{
+            margin: 0;
+        }
+        padding: 20px;
+        text-align: center;
+        width: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+    button{
+        display: flex;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
 </style>
