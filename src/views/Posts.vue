@@ -6,9 +6,9 @@
         </label>
         <label>
             Text:
-            <textarea :class="style.textareaWarning"></textarea>
+            <textarea :class="style.textareaWarning" ref="text"></textarea>
         </label>
-        <button :class="style.btnPrimaryLight">Postar</button>
+        <button :class="style.btnPrimaryLight" @click="postCreate()">Postar</button>
     </div>
     <div :class="style.card" v-for="post in posts" :key="post">
         <div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {searchPosts} from '../methods/posts.js'
+import {searchPosts, createPost} from '../methods/posts.js'
 import {style} from '../methods/style.js'
 export default{
     name: 'Posts',
@@ -33,6 +33,12 @@ export default{
             posts: [],
         }
     },
+    methods:{
+        async postCreate(){
+            const data = await createPost(this.$refs.title.value, this.$refs.text.value)
+            this.posts = data
+    }   ,
+    }, 
     async mounted(){
         this.posts = await searchPosts()
     }
