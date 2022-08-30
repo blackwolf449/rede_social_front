@@ -34,7 +34,7 @@ export default{
     .card{
         hr{
             width: 100px;
-            margin: 0 auto;
+            margin: 0;
         }
         div{
             display: flex;
@@ -45,8 +45,8 @@ export default{
             margin: 0;
         }
         padding: 20px;
-        text-align: center;
-        width: 200px;
+        text-align: left;
+        width: 400px;
         margin: 0 auto;
         margin-bottom: 20px;
     }
