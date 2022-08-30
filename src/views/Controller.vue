@@ -2,7 +2,7 @@
 <nav :class="style.navbar">
   <div :class="style.navbarBrand">
     <a :class="style.navbarItem" href="#">
-      <span><ion-icon name="alarm-outline" size="large"></ion-icon>TacToc</span>
+      <span><ion-icon name="alarm-outline" size="large"></ion-icon>SocialTime</span>
     </a>
   </div>
 
@@ -54,13 +54,17 @@
 </div>
 
 <router-view v-if="isSingIn"/>
+
+<Home v-if="!isSingIn"/>
 </template>
 
 <script>
 import {style} from '../methods/style.js'
 import {url} from '../methods/url.js'
+import Home from '../components/Home.vue'
 export default {
     name: "Controller",
+    components:{Home},
     data(){
       return {
         style: style,
