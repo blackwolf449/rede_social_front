@@ -1,5 +1,15 @@
 <template>
-    <button :class="style.btnInfoLight">Criar post</button>
+    <div :class="style.card">
+        <label>
+            Title:
+            <input type="text" ref="title" :class="style.inputPrimary">
+        </label>
+        <label>
+            Text:
+            <textarea :class="style.textareaWarning"></textarea>
+        </label>
+        <button :class="style.btnPrimaryLight">Postar</button>
+    </div>
     <div :class="style.card" v-for="post in posts" :key="post">
         <div>
             <ion-icon name="person-circle-outline"></ion-icon>
@@ -54,5 +64,6 @@ export default{
         display: flex;
         margin: 0 auto;
         margin-bottom: 10px;
+        margin-top: 10px;
     }
 </style>
