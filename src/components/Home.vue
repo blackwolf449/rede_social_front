@@ -40,7 +40,6 @@ section {
     width: 80vmin;
     height: 80vmin;
     margin: auto;
-    background: #fff url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3358&q=80') center center;
     border: 3vmin solid #000;
     border-radius: 50%;
     margin-top: 3vmin;
