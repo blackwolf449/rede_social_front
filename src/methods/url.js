@@ -1,3 +1,3 @@
-const urls = ['http://localhost:3000']
+const urls = ['http://localhost:3000', 'https://socialtimerede.herokuapp.com']
 
-export const url = urls[0]
+export const url = urls[1]
