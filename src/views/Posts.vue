@@ -59,15 +59,20 @@ export default{
                 }, 3000)
                 return this.erro.message = data.message
             }
+            this.$refs.title.value = ''
+            this.$refs.text.value = ''
             this.posts = data
+            this.posts.reverse()
         },
         async like(title){
             const data = await addLike(title)
             this.posts = data
+            this.posts.reverse()
         }
     }, 
     async mounted(){
         this.posts = await searchPosts()
+        this.posts.reverse()
     }
 }
 </script>
